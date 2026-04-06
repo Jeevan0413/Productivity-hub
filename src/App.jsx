@@ -3,10 +3,11 @@ import Todo from './components/Todo';
 import Pomodoro from './components/Pomodoro';
 import Notes from './components/Notes';
 import Habit from './components/Habit';
-import { LayoutDashboard, CheckSquare, Timer, FileText, Activity, Sun, Moon, Sparkles } from 'lucide-react';
+import Dashboard from './components/Dashboard';
+import { LayoutDashboard, Home, CheckSquare, Timer, FileText, Activity, Sun, Moon, Sparkles } from 'lucide-react';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('todo');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Initialize dark mode from user preference
@@ -27,6 +28,7 @@ function App() {
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const navItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home, color: 'text-blue-500' },
     { id: 'todo', label: 'To-Do List', icon: CheckSquare, color: 'text-indigo-500' },
     { id: 'pomodoro', label: 'Pomodoro', icon: Timer, color: 'text-rose-500' },
     { id: 'notes', label: 'Quick Notes', icon: FileText, color: 'text-amber-500' },
@@ -129,6 +131,7 @@ function App() {
             <div className="fixed bottom-20 left-60 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
 
             <div className="h-full transform transition-all duration-300 ease-in-out opacity-100 translate-y-0 relative z-0">
+              {activeTab === 'dashboard' && <Dashboard setActiveTab={setActiveTab} />}
               {activeTab === 'todo' && <Todo />}
               {activeTab === 'pomodoro' && <Pomodoro />}
               {activeTab === 'notes' && <Notes />}
